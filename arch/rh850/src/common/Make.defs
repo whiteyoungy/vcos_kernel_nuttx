@@ -1,0 +1,29 @@
+
+# Common rh850 files
+
+CMN_CSRCS += rh850_allocateheap.c
+CMN_CSRCS += rh850_checkstack.c
+CMN_CSRCS += rh850_createstack.c
+CMN_CSRCS += rh850_doirq.c
+CMN_CSRCS += rh850_exit.c
+CMN_CSRCS += rh850_getintstack.c
+CMN_CSRCS += rh850_idle.c
+CMN_CSRCS += rh850_initialize.c
+CMN_CSRCS += rh850_initialstate.c
+CMN_CSRCS += rh850_irq.c
+CMN_CSRCS += rh850_mdelay.c
+CMN_CSRCS += rh850_nputs.c
+CMN_CSRCS += rh850_registerdump.c
+CMN_CSRCS += rh850_releasestack.c
+CMN_CSRCS += rh850_schedulesigaction.c
+CMN_CSRCS += rh850_sigdeliver.c
+CMN_CSRCS += rh850_stackframe.c
+CMN_CSRCS += rh850_svcall.c
+CMN_CSRCS += rh850_switchcontext.c
+CMN_CSRCS += rh850_tcbinfo.c
+CMN_CSRCS += rh850_testset.c
+CMN_CSRCS += rh850_usestack.c
+
+CMN_CSRCS += rh850_stub.c
+
+CMN_ASRCS += rh850_saveusercontext.S

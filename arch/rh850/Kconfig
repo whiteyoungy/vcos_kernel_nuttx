@@ -1,0 +1,58 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+if ARCH_RH850
+comment "RH850 Options"
+
+choice
+	prompt "rh850 Toolchain Selection"
+	default RH850_TOOLCHAIN_GHS
+
+config RH850_TOOLCHAIN_GHS
+	bool "rh850 ghs tool chain"
+	select ARCH_TOOLCHAIN_GHS
+
+endchoice # rh850 Toolchain Selection
+
+config ARCH_RH850G3K
+	bool
+	default n
+
+config ARCH_U2AX
+	bool
+	select ARCH_HAVE_TESTSET
+	default n
+
+config ARCH_FAMILY
+	string
+	default "u2ax"		if ARCH_U2AX
+
+config ARCH_CHIP
+	string
+	default "u2ax"		if ARCH_CHIP_U2A16ICUM
+
+config ARCH_CHIP_U2A16ICUM
+	bool "RH850 Family U2A16ICUM"
+	select ARCH_U2AX
+	select ARCH_RH850G3K
+	select ALARM_ARCH
+	select ARCH_IRQPRIO
+	select ARCH_HAVE_IRQPRIO
+	select ARCH_HAVE_IRQTRIGGER
+	select ONESHOT
+	---help---
+		RH850 U2AX family: U2A16ICUM
+
+source "arch/rh850/src/common/Kconfig"
+
+if ARCH_U2AX
+source "arch/rh850/src/u2ax/Kconfig"
+endif
+
+if ARCH_RH850G3K
+source "arch/rh850/src/rh850g3k/Kconfig"
+endif
+
+endif # ARCH_RH850

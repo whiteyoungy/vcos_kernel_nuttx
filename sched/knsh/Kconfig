@@ -1,0 +1,102 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+menu "Kernel NuttShell"
+
+config KNSH
+	bool "Kernel NuttShell Support"
+	default n
+	---help---
+		Enable Kernel NuttShell.If enabled, the Kernel NuttShell is
+		accessed when os panic occurs
+
+if KNSH
+
+menu "Command Line Configuration"
+
+config KNSH_PROMPT_STRING
+	string "KNSH Prompt String"
+	default "knsh> "
+	---help---
+		Provide the shell prompt string with size limit KNSH_PROMPT_MAX.
+		default is "knsh> ".
+
+config KNSH_PROMPT_SUFFIX
+	string "Suffix used to derive fallback prompt string"
+	default "> "
+	---help---
+		When KNSH_PROMPT_STRING is empty, the cpu id or hostname will
+		be used to derive the prompt at runtime. This suffix is a part
+		of the final prompt that serves to clearly separate prompt from
+		user inputs.
+
+config KNSH_PROMPT_MAX
+	int "Maximum Size of Prompt String"
+	default NAME_MAX
+	---help---
+		The maximum size of shell prompt string, including ending null.
+
+config KNSH_LINELEN
+	int "Max command line length"
+	default 64 if DEFAULT_SMALL
+	default 80 if !DEFAULT_SMALL
+	---help---
+		The maximum length of one command line and of one output line.
+		Default: 64/80
+
+config KNSH_MAXARGUMENTS
+	int "Maximum number of command arguments"
+	default 7
+	---help---
+		The maximum number of KNSH command arguments.
+		Default: 7
+
+endmenu # Command Line Configuration
+
+menu "Disable Individual commands"
+
+config KNSH_DISABLE_HELP
+	bool "Disable help"
+	default n
+
+config KNSH_DISABLE_MB
+	bool "Disable mb"
+	default y
+
+config KNSH_DISABLE_MH
+	bool "Disable mh"
+	default y
+
+config KNSH_DISABLE_MW
+	bool "Disable mw"
+	default y
+
+config KNSH_DISABLE_XD
+	bool "Disable xd"
+	default DEFAULT_SMALL
+
+config KNSH_DISABLE_EXIT
+	bool "Disable exit"
+	default DEFAULT_SMALL
+
+endmenu
+
+config KNSH_SC
+	bool "Enable KNSH command of switch core in BMP"
+	depends on BMP
+	default y
+
+if KNSH_SC
+
+config KNSH_UART_IRQ
+	int "Uart IRQ number for switch core of shell"
+	default 0
+	---help---
+		Uart IRQ number for switch core of shell
+
+endif
+
+endif
+endmenu

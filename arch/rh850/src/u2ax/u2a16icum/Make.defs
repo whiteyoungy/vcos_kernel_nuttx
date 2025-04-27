@@ -1,0 +1,16 @@
+
+include rh850g3k/Make.defs
+
+HEAD_ASRC += startup.S
+
+# Common C source files
+
+CHIP_CSRCS += u2a16icum_main.c
+CHIP_CSRCS += u2a16icum_pll.c
+CHIP_CSRCS += u2a16icum_systimer.c
+
+VPATH += u2ax/u2a16icum
+
+INCLUDES += ${INCDIR_PREFIX}$(CURDIR)/u2ax/u2a16icum
+
+
